@@ -145,14 +145,46 @@ public class Main {
                 }
 
                 case 6 -> {
-                    
+                    int costoc1 = c1Internet * costoFijoInternet + c1Radio * costoFijoRadio + c1Tv * costoFijoTv;
+                    int costoc2 = c2Internet * costoFijoInternet + c2Radio * costoFijoRadio + c2Tv * costoFijoTv;
+                    int costoc3 = c3Internet * costoFijoInternet + c3Radio * costoFijoRadio + c3Tv * costoFijoTv;
+                    double promedio = (costoc1 + costoc2 + costoc3) / 3.0;
+                    System.out.println("COSTO PROMEDIO DE CAMPAÑA CANDIDATOS: $" + (long) promedio);
                 }
-
 
                 case 7 -> {
-                    
+                    int total = votosC1 + votosC2 + votosC3 + votosBlanco;
+                    if (total == 0) {
+                        System.out.println("NO HAY VOTOS REGISTRADOS");
+                    } else {
+                        int auxConteo = votosC1;
+                        if (votosC2 > auxConteo) auxConteo = votosC2;
+                        if (votosC3 > auxConteo) auxConteo = votosC3;
+                        if (votosBlanco > auxConteo) auxConteo = votosBlanco;
+
+                        String ganador = "";
+
+                        if (votosC1 == auxConteo) ganador += "** Candidato 1 **";
+                        if (votosC2 == auxConteo) ganador += "** Candidato 2 **";
+                        if (votosC3 == auxConteo) ganador += "** Candidato 3 **";
+                        if (votosBlanco == auxConteo) ganador += "** Voto en Blanco **";
+
+                        int escrutinio = 0;
+                        if (votosC1 == auxConteo) escrutinio++;
+                        if (votosC2 == auxConteo) escrutinio++;
+                        if (votosC3 == auxConteo) escrutinio++;
+                        if (votosBlanco == auxConteo) escrutinio++;
+
+                        if (votosBlanco == auxConteo && escrutinio == 1) {
+                            System.out.println("GANA EL VOTO EN BLANCO (" + auxConteo + " VOTOS) - POR LO TANTO NO HAY CANDIDATO ELECTO");
+                        } else if (escrutinio > 1) {
+                            System.out.println("EMPATE ENTRE: " + ganador + "Y " + auxConteo + " VOTOS CADA UNO");
+                        } else {
+                            System.out.println("CANDIDATO ELECTO: " + ganador + "CON " + auxConteo + " VOTOS");
+                        }
+                    }
                 }
-                
+
                 case 8 -> System.out.println("SALIENDO DEL SISTEMA DE VOTACIÓN");
                 default -> System.out.println("DIGITASTE UNA OPCIÓN NO VALIDA");
             }
